@@ -3,6 +3,7 @@ from scrapy.http import FormRequest
 from scrapy.spiders import BaseSpider
 from scrapy.selector import Selector
 from nod.items import Notice
+import re
 
 
 class NodSpider(BaseSpider):
@@ -12,12 +13,10 @@ class NodSpider(BaseSpider):
     start_urls = ["http://www.mypublicnotices.com/OrangeCounty/PublicNotice.asp?Page=SearchResults"]
 
     def parse(self, response):
-        formdata = {'DateRange': 'Last60', 'Category': '17'}
-        yield FormRequest.from_response(response, formdata, callback=self.parse1)
+        yield FormRequest.from_response(response, formdata={'DateRange': 'Last60', 'Category': '17'}, callback=self.parse1)
 
     def parse1(self, response):
-        formdata = {'Count': '100', 'FullTextType': '0'}
-        yield FormRequest.from_response(response, formdata, callback=self.parse2)
+        yield FormRequest.from_response(response, formdata={'Count': '100', 'FullTextType': '0'}, callback=self.parse2)
 
     def parse2(self, response):
         public_notice_content = Selector(response).xpath('.//div[@id="PublicNoticeContent"]//table')
@@ -26,7 +25,7 @@ class NodSpider(BaseSpider):
         w_search_results = public_notice_content.xpath('.//tr//td[contains(@class, "SearchResults2")]')
 
         items = []
-        for s in range(0, 3):
+        for s in range(0, 50):
             item = Notice()
 
             notice_cell = g_search_results[3*s]
@@ -37,7 +36,7 @@ class NodSpider(BaseSpider):
             item['body'] = ''.join(notice_cell.xpath('descendant-or-self::text()').extract()).encode('ascii', errors='ignore')
 
             publication_cell = g_search_results[3*s+1]
-            publication_info = publication_cell.sxpath('descendant-or-self::text()').extract()
+            publication_info = publication_cell.xpath('descendant-or-self::text()').extract()
             item['publication_name'] = publication_info[1].encode('ascii', errors='ignore')
             item['publication_dates'] = publication_info[2].encode('ascii', errors='ignore')
 
