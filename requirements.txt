@@ -12,6 +12,7 @@ decorator==4.0.9
 entrypoints==0.2
 enum34==1.1.3
 functools32==3.2.3.post2
+future==0.15.2
 gnureadline==6.3.3
 idna==2.1
 ipaddress==1.0.16
@@ -27,6 +28,7 @@ jupyter-console==4.1.1
 jupyter-core==4.1.0
 lxml==3.6.0
 MarkupSafe==0.23
+Metafone==0.5
 mistune==0.7.2
 nbconvert==4.2.0
 nbformat==4.0.1
@@ -34,12 +36,17 @@ notebook==4.2.0
 pathlib2==2.1.0
 pexpect==4.0.1
 pickleshare==0.7.2
+probableparsing==0.0.1
 ptyprocess==0.5.1
+pyaml==15.8.2
+pyap==0.1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
 pycparser==2.14
 Pygments==2.1.3
 pyOpenSSL==16.0.0
+python-crfsuite==0.8.4
+PyYAML==3.11
 pyzmq==15.2.0
 qtconsole==4.2.1
 queuelib==1.4.2
@@ -52,6 +59,7 @@ terminado==0.6
 tornado==4.3
 traitlets==4.2.1
 Twisted==16.1.1
+usaddress==0.5.7
 w3lib==1.14.2
 widgetsnbextension==1.0.0
 zope.interface==4.1.3
