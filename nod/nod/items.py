@@ -6,5 +6,6 @@ class Notice(Item):
     url = Field()
     heading = Field()
     body = Field()
+    addresses = Field()
     publication_name = Field()
     publication_dates = Field()
